@@ -12,14 +12,17 @@ import Prelude
 import FFI
 #endif
 
-data Object = Player | Wall | Item
+ajax_update_path = "/ajax/update"
+
+data Visible = Opened String | Hidden
   deriving(Show, Data, Typeable)
 
-data Cell = Cell Int Int [Object]
+data Card = Card Visible (Int,Int) 
   deriving(Show, Data, Typeable)
 
-data Board = Board
-  { flds :: [[Cell]]
-  }
+data StateTag = StateTag Int
+  deriving(Show, Data, Typeable)
+
+data Board = Board StateTag [Card]
   deriving(Show, Data, Typeable)
 

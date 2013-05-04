@@ -1,6 +1,6 @@
 $(function() {
 	$(".card").each( function() {
-		$(this).draggable({
+		$(this).draggable(/* {
 			stop: function() {
 				$.ajax({
 					type: 'post',
@@ -9,8 +9,7 @@ $(function() {
 					data: JSON.stringify({'name':'1234', 'age':28 }),
 					contentType: 'application/json'
 				});
-			}
-		});
+		}*/);
 	});
 });
 
