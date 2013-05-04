@@ -57,31 +57,26 @@ site = B.html $ do
     B.title "Hello, snap"
 
     linkcss "Styles.css"
+    B.link ! B.rel "stylesheet" ! B.href "http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"
+    B.script ! B.src "http://code.jquery.com/jquery-1.9.1.js" $ return ()
+    B.script ! B.src "http://code.jquery.com/ui/1.10.3/jquery-ui.js" $ return ()
+    B.script "$(function() { $( \".card\" ).each( function() { $(this).draggable();}); });"
 
-    -- B.script ! B.type_ "text/javascript" ! B.src "/fay/Index.js" $ return ()
   B.body $ do
     B.div $ B.p "This is a header"
     B.div $ B.h1 "Hello, Snap+Blaze+Fay"
 
-    let card (x :: String) = B.img ! B.src (B.toValue (printf "/static/img/small/%s.png" x :: String))
-                                   ! B.id (B.toValue x) ! B.class_ "drag"
+    B.div $ do
+      let card (x :: String) = B.img ! B.src (B.toValue (printf "/static/img/small/%s.png" x :: String))
+                ! B.id (B.toValue x) ! B.class_ "card ui-widget-content"
 
-    card "card0"
-    card "card1"
-    card "card2"
-    card "card3"
-    card "card4"
-    card "card5"
+      card "card0"
+      card "card1"
+      card "card2"
+      card "card3"
+      card "card4"
+      card "card5"
 
-    -- card "card1" $ return ()
-    -- card "card2" $ return ()
-    -- B.table $
-    --   forM_ [0..9] $ \(i :: Int) -> do
-    --     B.tr $ do
-    --       forM_ [0..9] $ \(j :: Int) -> do
-    --         B.td ! (B.id (B.toValue $ (printf "%d_%d" i j :: String))) $ do
-
-    linkjs "DragDrop.js"
     B.div ! B.class_ "debug" $ B.p "This is a footer"
 
 app :: SnapletInit App App
